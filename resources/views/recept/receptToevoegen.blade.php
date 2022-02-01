@@ -5,6 +5,13 @@
     <div class="w-10/12 bg-gray-200/50  p-6 rounded-lg ">
         <h1 class="p-4 text-gray-600">Recept toevoegen</h1>
         <form action="{{ route('receptToevoegen') }}" method="POST">
+        <div class="p-4 w-full">
+        Kies de categorien die bij het recept passen:
+        @foreach ($categories as $categorie)
+        <input type="checkbox" id="categorie" name="categorien[]" value="{{ $categorie->id }}">
+        <label for="{{ $categorie->id }}">{{ $categorie->naam  }}/ </label>
+        @endforeach
+    </div>
             <div class="flex">
                 <div class="w-4/12 bg-gray-200/50  p-4 rounded-lg ">
                     @csrf
@@ -41,7 +48,7 @@
                         </thead>
                         <tbody id="parent">
                             <tr>
-                                <td > <select class=" p-2 rounded-lg" name="ingredient[0][0]" id="ingredient" onchange="keuze(this.value)">
+                                <td > <select class=" p-2 rounded-lg" name="ingredient[0][0]" id="ingredient">
                                         @foreach($ingredienten as $ingredient)
                                         <option value="{{ $ingredient->id }}">
                                             {{ $ingredient->naam }}
@@ -78,6 +85,7 @@
                         <option value="5">5: Heel moeilijk</option>
                     </select>
                 </div>
+               
                 <div>
                     <button type="submit" class="bg-lime-600 mt-6 text-white px-4 py-3 rounded font-medium w-full">
                         Recept toevoegen </button>
@@ -86,13 +94,7 @@
                 </div>
             </div>
     </div>
-    <div class="p-4">
-        Kies de categorien die bij het recept passen:
-        @foreach ($categories as $categorie)
-        <input type="checkbox" id="{{ $categorie->id }}" name="{{ $categorie->id }}" value="{{ $categorie->naam }}">
-        <label for="{{ $categorie->id }}">{{ $categorie->naam  }}/ </label>
-        @endforeach
-    </div>
+   
     </form>
 </div>
 </div>
